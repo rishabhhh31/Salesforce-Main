@@ -1,7 +1,9 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 import getCharacters from '@salesforce/apex/HarryPotterAPIService.getCharacters';
 import getCharacterById from '@salesforce/apex/HarryPotterAPIService.getCharacterById';
 import UserLogo from "@salesforce/resourceUrl/UserLogo";
+import { publish, MessageContext } from 'lightning/messageService';
+import characterDetail from '@salesforce/messageChannel/characterDetails__c';
 
 const COLUMNS = [
     {
@@ -41,6 +43,9 @@ export default class HarryPotterCollections extends LightningElement {
     connectedCallback() {
         this.labels = [this.allCharacterLabel, this.hogwartsStudentsLabel, this.hogwartsStaffLabel];
     }
+
+    @wire(MessageContext)
+    messageContext;
 
     async getCharacterData(fetchDataFunc) {
         try {
@@ -148,7 +153,7 @@ export default class HarryPotterCollections extends LightningElement {
 
     async characterSelection(event) {
         let characterId = event.detail.config.value;
-        let response = await getCharacterById({ characterId: characterId })
-        console.log(response);
+        const payload = { characterId: characterId };
+        publish(this.messageContext, characterDetail, payload);
     }
 }
