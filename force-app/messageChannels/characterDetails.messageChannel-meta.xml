@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Message Channel to pass a character Id</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>This is the character Id to fetch character details.</description>
+        <fieldName>characterId</fieldName>
+    </lightningMessageFields>
+    <masterLabel>CharacterDetails</masterLabel>
+</LightningMessageChannel>

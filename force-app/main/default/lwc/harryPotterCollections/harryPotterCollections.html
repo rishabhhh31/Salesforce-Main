@@ -1,0 +1,28 @@
+<template>
+    <lightning-card>
+        <lightning-tabset variant="scoped">
+            <template for:each={labels} for:item="label">
+                <lightning-tab key={label} label={label} value={label} onactive={handleActive}>
+                    <div class="slds-var-m-around_small slds-grid slds-gutters">
+                        <div class="slds-col">
+                            <lightning-input placeholder="search name" value={searchedCharacter}
+                                is-loading={searchLoading} data-tab-name={label} onchange={searchByCharacterName}
+                                name="search" variant="label-hidden" label="Search Character"
+                                type="search"></lightning-input>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-combobox variant="label-hidden" data-tab-name={label}
+                                onchange={handleHouseChange} options={hogwartsHouses} value={currentHouse}
+                                label="House"></lightning-combobox>
+                        </div>
+                    </div>
+                    <div style="height: 250px;">
+                        <lightning-spinner variant="brand" lwc:if={isLoading} size="small"></lightning-spinner>
+                        <c-custom-harry-potter-table max-row-selection="1" onrowselection={characterSelection}
+                            key-field="id" data={filteredCharacters} columns={columns}></c-custom-harry-potter-table>
+                    </div>
+                </lightning-tab>
+            </template>
+        </lightning-tabset>
+    </lightning-card>
+</template>
