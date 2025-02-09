@@ -7,6 +7,7 @@ public with sharing class HarryPotterAPIService {
      * @return The character details as a HarryPotterCharacterWrapper object.
      * @throws AuraHandledException if there is an API error or exception.
      */
+
     @AuraEnabled
     public static HarryPotterCharacterWrapper getCharacterById(String characterId) {
         try {
