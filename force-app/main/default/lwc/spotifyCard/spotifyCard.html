@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title={trackItem.name}>
+        <div style="width: 300px;">
+            <img src={imageUrl}>
+        </div>
+        <div>
+            <lightning-button label="Open in spotify" data-external-url={trackItem.external_urls.spotify} onclick={openSpotify}>
+            </lightning-button>
+        </div>
+        
+        <lightning-button-icon data-uri-id={trackItem.uri} value="back" icon-class="slds-var-m-around_x-small" onclick={playerHandler} variant="border-filled" icon-name='utility:back' alternative-text='back' size='medium' title='back'></lightning-button-icon>
+        
+        <lightning-button-icon data-uri-id={trackItem.uri} value="play" icon-class="slds-var-m-around_x-small" onclick={playerHandler} variant="border-filled" icon-name='utility:play' alternative-text='play' size='medium ' title='play'></lightning-button-icon>
+
+        <lightning-button-icon data-uri-id={trackItem.uri} value="pause" icon-class="slds-var-m-around_x-small" onclick={playerHandler} variant="border-filled" icon-name='utility:pause' alternative-text='pause' size='medium' title='pause'></lightning-button-icon>
+
+        <lightning-button-icon data-uri-id={trackItem.uri} value="next" icon-class="slds-var-m-around_x-small" onclick={playerHandler} variant="border-filled" icon-name='utility:forward' alternative-text='next' size='medium' title='next'></lightning-button-icon>
+        
+    </lightning-card>
+</template>
