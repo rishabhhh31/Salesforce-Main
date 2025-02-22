@@ -13,6 +13,6 @@ public with sharing class QueueableApexScenario implements Queueable {
             accList.add(acc);
         }
         Database.update(accList, false, AccessLevel.USER_MODE);
-        System.enqueueJob(new QueueableContactScenario(accList, 'Email', 'test@queueable.com'));
+        System.enqueueJob(new QueueableContactScenario(accList, 'Email', 'testcontacts@queueable.com'));
     }
 }
