@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Bulk Contact Upload">
+        <div class="slds-var-m-around_medium">
+            <lightning-input variant="label-hidden" type="file" label="Upload File"
+                field-level-help="upload csv files only" onchange={handleFileUpload} accept={accept}></lightning-input>
+            <div class="slds-var-m-top_small">
+                <lightning-pill lwc:if={isFileUploaded} name={uploadedFile.name} label={uploadedFile.name}
+                    onremove={handleRemove}>
+                    <lightning-icon icon-name="doctype:attachment" alternative-text="attachment">
+                    </lightning-icon>
+                </lightning-pill>
+            </div>
+        </div>
+        <div class="slds-var-m-around_medium" lwc:if={hasRecords}>
+            <c-custom-bulk-contact-upload-table draft-values={draftValues} onsave={handleSave} hide-checkbox-column
+                columns={columns} data={contacts} key-field="conId">
+            </c-custom-bulk-contact-upload-table>
+        </div>
+    </lightning-card>
+</template>
