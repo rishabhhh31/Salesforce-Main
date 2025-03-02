@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="File Upload Box" icon-name="custom:custom14">
+        <lightning-spinner lwc:if={isLoading} variant="brand"></lightning-spinner>
+        <div class="slds-m-around_medium">
+            <lightning-input type="file" label="Attachment" onchange={openfileUpload}></lightning-input>
+            <template if:true={fileData}>
+                <p>{fileData.filename}</p>
+            </template>
+        </div>
+        <lightning-button variant="brand" label="submit" title="Submit" onclick={handleClick}
+            class="slds-m-around_medium" disabled={disabledBtn}></lightning-button>
+    </lightning-card>
+</template>
