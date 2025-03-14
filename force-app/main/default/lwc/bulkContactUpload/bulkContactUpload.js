@@ -20,6 +20,7 @@ export default class BulkContactUpload extends LightningElement {
         if (data) {
             this.picklistKeyValue = data;
         } else if (error) {
+            this.showToast('Error', error.body.message, 'error');
         }
     }
 
@@ -31,7 +32,7 @@ export default class BulkContactUpload extends LightningElement {
         try {
             this.fieldMap = await getFieldMetadata();
         } catch (error) {
-            this.showToast('Error', 'Failed to fetch field metadata', 'error');
+            this.showToast('Error', error.body.message, 'error');
         }
     }
 
