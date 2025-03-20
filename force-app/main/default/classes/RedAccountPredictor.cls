@@ -11,14 +11,14 @@ public class RedAccountPredictor {
      */
     public Map<String, Boolean> predictForCases(List<String> caseIds) {
         List<Case> casesMatchingIds = [
-            SELECT Id, AccountId FROM Case WHERE Id IN :caseIds
+            SELECT Id, Account.Id FROM Case WHERE Id IN :caseIds
         ];
         
         if (casesMatchingIds != null && !casesMatchingIds.isEmpty()) {
             List<String> accountIds = new List<String>();
             for (Case c : casesMatchingIds) {
                 if (c.Account != null) {
-                    accountIds.add(c.AccountId);
+                    accountIds.add(c.Account.Id);
                 }
             }
             return predictForAccounts(accountIds);
