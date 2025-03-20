@@ -1,0 +1,6 @@
+<template>
+    <lightning-card title="Parent">
+        <lightning-button variant="destructive" label="Call Child Method" onclick={clickHandler}></lightning-button>
+        <c-child-communication onnotify={notifyHandler} message_-value={message}></c-child-communication>
+    </lightning-card>
+</template>

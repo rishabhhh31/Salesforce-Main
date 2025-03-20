@@ -1,0 +1,11 @@
+.High {
+    --slds-c-icon-color-background: rgb(150, 9, 9);
+}
+
+.Medium {
+    --slds-c-icon-color-background: #ff5d2d;
+}
+
+.Low {
+    --slds-c-icon-color-background: #055661;
+}
