@@ -19,7 +19,7 @@ export default class CustomCaseList extends LightningElement {
                                 Subject { value }
                                 Description { value }
                                 Priority { value }
-                                CreatedDate { value } 
+                                CreatedDate { value }
                                 Status { value }
                             }
                         }
@@ -44,10 +44,11 @@ export default class CustomCaseList extends LightningElement {
 
     handleViewCase(event) {
         CaseModal.open({
-            caseId: event.detail.Id
+            size: 'small',
+            caseId: event.detail.Id,
+            onselect: (e) => {
+            }
         }).then((result) => {
-            console.log(result);
         });
     }
-
 }
