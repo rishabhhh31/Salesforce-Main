@@ -1,5 +1,6 @@
 <template>
     <lightning-card>
+        <lightning-spinner lwc:if={isLoading} size="medium" variant="brand"></lightning-spinner>
         <div class="slds-var-m-around_small">
             <lightning-button variant="destructive" onclick={refreshStaleData} label="Refresh"></lightning-button>
         </div>
@@ -14,6 +15,7 @@
     </lightning-card>
     <div class="slds-var-m-around_small"></div>
     <lightning-card>
+        <lightning-spinner lwc:if={isLoading} size="medium" variant="brand"></lightning-spinner>
         <div class="slds-var-m-around_small">
             <lightning-input label="Account Name" data-field-name="Name" onchange={handleChange}></lightning-input>
             <lightning-input label="Account Industry" data-field-name="Industry"

@@ -12,6 +12,7 @@ const COLUMN = [
 ]
 export default class ApexHandler extends LightningElement {
     @api recordId;
+    isLoading = false;
     columns = COLUMN;
     accountResult;
     accounts = [];
@@ -44,6 +45,7 @@ export default class ApexHandler extends LightningElement {
 
     async createAccount() {
         try {
+            this.isLoading = true;
             const recordInput = { apiName: ACCOUNT_OBJECT.objectApiName, fields: this.field };
             const account = await createRecord(recordInput);
             let inputFields = [...this.template.querySelectorAll('lightning-input')];
@@ -52,11 +54,14 @@ export default class ApexHandler extends LightningElement {
             })
         } catch (error) {
             console.log(error);
+        } finally {
+            this.isLoading = false;
         }
     }
 
     async handleSave(event) {
         try {
+            this.isLoading = true;
             this.draftValues = event.detail.draftValues
             let records = this.draftValues.map(fields => {
                 return { fields };
@@ -72,6 +77,8 @@ export default class ApexHandler extends LightningElement {
         }
         catch (error) {
             console.log(error);
+        } finally {
+            this.isLoading = false;
         }
     }
 
@@ -81,6 +88,7 @@ export default class ApexHandler extends LightningElement {
 
     async handleDeletion() {
         try {
+            this.isLoading = true;
             let deletedPromise = this.selectedDeletionRows.map(row => {
                 return deleteRecord(row.Id);
             });
@@ -88,6 +96,8 @@ export default class ApexHandler extends LightningElement {
             await refreshApex(this.accountResult);
         } catch (error) {
             console.log(error);
+        } finally {
+            this.isLoading = false;
         }
     }
 
