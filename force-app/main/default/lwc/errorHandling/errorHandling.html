@@ -1,0 +1,38 @@
+<template>
+    <lightning-card>
+        <div class="slds-var-m-around_x-small">
+            <lightning-input required label="Account Name" data-field="Name" onchange={handleAccountChange}
+                placeholder="Enter account name"></lightning-input>
+        </div>
+
+        <div class="slds-var-m-around_x-small">
+            <lightning-combobox label="Industry" data-field="Industry" placeholder="Choose Industry"
+                onchange={handleAccountChange} options={industries}>
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-var-m-around_x-small">
+            <lightning-combobox data-field="Active__c" label="Active Status" placeholder="Choose Status"
+                onchange={handleAccountChange} options={active}>
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-var-m-around_x-small">
+            <lightning-combobox label="Type" data-field="Type" placeholder="Choose Type" onchange={handleAccountChange}
+                options={types}>
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-var-m-around_x-small">
+            <lightning-combobox label="Rating" data-field="Rating" placeholder="Choose Rating"
+                onchange={handleAccountChange} options={ratings}>
+            </lightning-combobox>
+        </div>
+
+        <lightning-button class="slds-var-m-around_x-small" variant="destructive" label="Save"
+            onclick={handleSave}></lightning-button>
+
+        <lightning-button class="slds-var-m-around_x-small" variant="destructive" label="Reset"
+            onclick={handleReset}></lightning-button>
+    </lightning-card>
+</template>

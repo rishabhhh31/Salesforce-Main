@@ -16,4 +16,14 @@ public with sharing class SOQL_Handler {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    @AuraEnabled
+    public static string updateAccount(Account acc){
+        try {
+            insert acc;
+            return acc.Id;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }
