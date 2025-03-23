@@ -1,3 +1,27 @@
 <template>
-    
+    <lightning-card>
+        <div class="slds-var-m-around_small">
+            <lightning-button variant="destructive" onclick={refreshStaleData} label="Refresh"></lightning-button>
+        </div>
+        <div class="slds-var-m-around_small">
+            <lightning-button variant="destructive" disabled={isRowSelected} onclick={handleDeletion}
+                label="Delete Selection Account"></lightning-button>
+        </div>
+        <div class="slds-var-m-around_small">
+            <lightning-datatable draft-values={draftValues} onrowselection={handleRowSelection} onsave={handleSave}
+                data={accounts} columns={columns} key-field="Id"></lightning-datatable>
+        </div>
+    </lightning-card>
+    <div class="slds-var-m-around_small"></div>
+    <lightning-card>
+        <div class="slds-var-m-around_small">
+            <lightning-input label="Account Name" data-field-name="Name" onchange={handleChange}></lightning-input>
+            <lightning-input label="Account Industry" data-field-name="Industry"
+                onchange={handleChange}></lightning-input>
+            <lightning-input label="Account Rating" data-field-name="Rating" onchange={handleChange}></lightning-input>
+        </div>
+        <div class="slds-var-m-around_small">
+            <lightning-button variant="destructive" onclick={createAccount} label="Create Account"></lightning-button>
+        </div>
+    </lightning-card>
 </template>

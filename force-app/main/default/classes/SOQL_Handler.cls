@@ -7,4 +7,13 @@ public with sharing class SOQL_Handler {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    @AuraEnabled(cacheable = true)
+    public static List<Account> getAllAccountWithContacts(){
+        try {
+            return [SELECT Id, Name, Industry, Rating, Phone FROM Account];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }

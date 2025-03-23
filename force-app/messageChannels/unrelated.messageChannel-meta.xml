@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>UnrelatedComponents</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Message Channel to pass data between two unrelated components.</description>
+    <lightningMessageFields>
+        <fieldName>data</fieldName>
+        <description>Any data passed to component</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>recordId</fieldName>
+        <description>record id passed to component</description>
+    </lightningMessageFields>
+</LightningMessageChannel>
