@@ -1,0 +1,9 @@
+<template>
+    <lightning-card>
+        <lightning-button class="slds-var-m-around_medium" label="Generate Random Dog"
+            onclick={getDogImage}></lightning-button>
+        <div lwc:if={dogUrl} class="slds-var-m-around_medium">
+            <img width="400px" src={dogUrl} alt="Dog Image" />
+        </div>
+    </lightning-card>
+</template>
