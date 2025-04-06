@@ -23,9 +23,7 @@ export default class HeaderlessQuickAction extends LightningElement {
             variant: 'success'
         });
         this.dispatchEvent(event);
-
         await this.sleep(2000);
-        
         event = new ShowToastEvent({
             title: 'I am a headless action on record with id ' + this.recordId,
             message: 'All done!',
