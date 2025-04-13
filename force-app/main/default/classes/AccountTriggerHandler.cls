@@ -11,4 +11,8 @@ public with sharing class AccountTriggerHandler {
             throw new AuraHandledException(ex.getMessage());            
         }
     }
+
+    public static void sendAccountExternal(List<Account> newAccounts){
+        System.enqueueJob(new ExternalAccountController(newAccounts));
+    }
 }

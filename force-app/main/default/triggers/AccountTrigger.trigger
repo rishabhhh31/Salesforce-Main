@@ -1,5 +1,5 @@
-trigger AccountTrigger on Account (before update) {
-    if(Trigger.isBefore && Trigger.isUpdate){
-        // AccountTriggerHandler.stopAccountUpdateOneHour(Trigger.new);
+trigger AccountTrigger on Account (after insert) {
+    if(Trigger.isAfter && Trigger.isInsert){
+        AccountTriggerHandler.sendAccountExternal(Trigger.new);
     }
 }
