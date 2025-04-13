@@ -143,4 +143,88 @@ global class ExternalAccountHandlerAPI {
             this.status = status;
         }
     }
+
+    @HttpPatch
+    global static void updateAccounts() {
+        RestRequest req = RestContext.request;
+        RestResponse res = RestContext.response;
+        List<UpdateResponse> responses = new List<UpdateResponse>();
+        try {
+            String accountJson = req.requestBody != null ? req.requestBody.toString() : '';
+            if (String.isBlank(accountJson)) {
+                res.statusCode = 400;
+                res.responseBody = Blob.valueOf(JSON.serialize(
+                    new List<UpdateResponse>{
+                        new UpdateResponse('Request body is empty or invalid', null, 400)
+                    }
+                ));
+                return;
+            }
+
+            List<Account> incomingAccounts = (List<Account>)JSON.deserialize(accountJson, List<Account>.class);
+            if (incomingAccounts.isEmpty()) {
+                res.statusCode = 400;
+                res.responseBody = Blob.valueOf(JSON.serialize(
+                    new List<UpdateResponse>{
+                        new UpdateResponse('No accounts provided for update', null, 400)
+                    }
+                ));
+                return;
+            }
+            
+            Map<Id, Account> accountMap = new Map<Id, Account>();
+            for(Account account :  incomingAccounts){
+                accountMap.put(account.Id, account);
+            }
+    
+            List<Account> accountToUpdate = [SELECT Id, External_Account_Id__c FROM Account WHERE External_Account_Id__c IN : accountMap.keySet() AND External_Account_Id__c != null];
+            List<Account> accountList = new List<Account>();
+            for(Account acc : accountToUpdate){
+                if(accountMap.containsKey(acc.External_Account_Id__c)){
+                    Account accUpd = accountMap.get(acc.External_Account_Id__c).clone(false, false, false, false);
+                    accUpd.Id = acc.Id;
+                    accUpd.OwnerId = UserInfo.getUserId();
+                    accountList.add(accUpd);
+                }
+            }
+            if(!accountList.isEmpty()){
+                Database.SaveResult[] results = Database.update(accountList, false);
+                for (Database.SaveResult result : results) {
+                    responses.add(
+                        new UpdateResponse(
+                            result.isSuccess() ? 'Record updated successfully' : result.getErrors()[0].getMessage(),
+                            result.getId(),
+                            result.isSuccess() ? 200 : 400
+                        )
+                    );
+                }
+                RestContext.response.statusCode = 200;
+                RestContext.response.responseBody = Blob.valueOf(JSON.serialize(responses));
+            } else {
+                responses.add(new UpdateResponse('No matching accounts found to update', null, 404));
+            }
+
+        } catch (Exception ex) {
+            res.statusCode = 500;
+            res.responseBody = Blob.valueOf(JSON.serialize(
+                new List<UpdateResponse>{
+                    new UpdateResponse('Unexpected Error: ' + ex.getMessage(), null, 500)
+                }
+            ));
+        }
+    }
+
+    global class UpdateResponse {
+        public String message;
+        public String id;
+        public Integer status;
+
+        public UpdateResponse() {}
+
+        public UpdateResponse(String message, String id, Integer status) {
+            this.message = message;
+            this.id = id;
+            this.status = status;
+        }
+    }
 }
