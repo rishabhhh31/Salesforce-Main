@@ -3,8 +3,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>harryPotterCollections</componentName>
-                <identifier>c_harryPotterCollections</identifier>
+                <componentName>apiReadOnly</componentName>
+                <identifier>c_apiReadOnly</identifier>
             </componentInstance>
         </itemInstances>
         <name>region1</name>
@@ -13,8 +13,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>characterCard</componentName>
-                <identifier>c_characterCard</identifier>
+                <componentName>ssubscribeComponent</componentName>
+                <identifier>c_ssubscribeComponent</identifier>
             </componentInstance>
         </itemInstances>
         <name>region2</name>
