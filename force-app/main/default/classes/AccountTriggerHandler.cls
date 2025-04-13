@@ -15,4 +15,7 @@ public with sharing class AccountTriggerHandler {
     public static void sendAccountExternal(List<Account> newAccounts){
         System.enqueueJob(new ExternalAccountController(newAccounts));
     }
+    public static void sendDeletedAccountInfo(Map<Id, Account> deletedAccounts){
+        System.enqueueJob(new DeleteExternalAccount(deletedAccounts.keySet()));
+    }
 }
