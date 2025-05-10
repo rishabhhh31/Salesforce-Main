@@ -15,7 +15,7 @@ export default class WireErrors extends LightningElement {
     caseInfo({ data, error }) {
         if (data) {
             this.cases = data;
-            console.log(data);
+            console.log('data', data);
         } else if (error) {
             console.log(error);
         }
